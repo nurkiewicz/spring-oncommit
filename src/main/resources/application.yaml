@@ -1,0 +1,9 @@
+spring:
+  activemq:
+    broker-url: 'tcp://localhost:61616'
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      register-mbeans: true
+  jmx:
+    enabled: false
