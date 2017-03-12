@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod.GET
 import org.springframework.web.bind.annotation.RequestMethod.POST
 import org.springframework.web.bind.annotation.RestController
 import java.time.Instant
-import java.util.concurrent.TimeUnit
 
 @RestController
 open class Sample(
@@ -35,7 +34,6 @@ open class Sample(
 		return object : TransactionSynchronizationAdapter() {
 			override fun afterCommit() {
 				val result = "Hello " + Instant.now()
-				TimeUnit.SECONDS.sleep(5)
 				jms.send("queue", { it.createTextMessage(result) })
 			}
 		}
