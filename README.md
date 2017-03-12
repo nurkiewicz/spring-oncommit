@@ -63,7 +63,7 @@ At this point we are pretty sure SQL is not the problem.
 
 We looked at the stack dump of the server and quickly found the problem.
 Let's look at the simplified piece of code that turned out to be the culprit after analyzing the stack dump.
-I wrote a sample application available on GitHub that exposes the same problem:
+I wrote a sample application [available on GitHub](https://github.com/nurkiewicz/spring-oncommit) that exposes the same problem:
 
 	@RestController
 	open class Sample(
@@ -117,7 +117,7 @@ So post-commit hooks are important<sup>1</sup>.
 What happened then?
 Before looking at the stack dump let's examine the metrics that Hikari exposes:
 
-TODO: JMX screenshot
+![25 threads](src/main/img/25threads.png)
 
 Under moderately high load (25 concurrent requests simulated with `ab`) we can clearly see that pool of 10 connections is fully utilized.
 However 15 threads (requests) are blocked waiting for database connection.
